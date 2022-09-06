@@ -5,7 +5,7 @@ import { FiDelete } from "react-icons/fi";
 
 const Div = styled.div`
     border: 1px solid lightgray;
-    width: 50vw;
+    max-width: 50%;
     margin: 0 auto;
     background-color: #c1e8ee;
     border: 1px solid pink;
@@ -32,10 +32,25 @@ const Form = styled.form`
         cursor: pointer;
     }
 `
-const DelAll = styled.button`
+export const Btnadd= styled.button`
+  :hover{
+    background-color: lightgreen;
+  }
+`
+export const DelItem= styled.button`
+  :hover{
+    background-color: lightslategray;
+  }
+`
+export const DelAll= styled.button`
   color: red;
   background-color: lightpink;
+
+  :hover{
+    background-color: red;
+  }
 `
+
 export default function Todo(){
 
 const [input, setInput] = useState()
@@ -65,12 +80,12 @@ function ClearAll(id){
     <Div>
       <h1>LISTA TO-DO</h1>
       <Form onSubmit={(e) => e.preventDefault()}>
-        <button onClick={() =>{Add()}}>ADD</button>
+        <Btnadd title='Adicionar item' onClick={() =>{Add()}}>ADD</Btnadd>
         <input value={input} onChange={e=>setInput(e.target.value)} />
         {List.map((item) => (
             <li>
                 {item.value}
-                <button title='Apagar item' onClick={() =>{Del(item.id)}}><FiDelete /></button>
+                <DelItem title='Apagar item' onClick={() =>{Del(item.id)}}><FiDelete /></DelItem>
             </li>
         ))}
         <DelAll title='Apagar todos os itens' onClick={() =>{ClearAll()}}><AiOutlineDelete /></DelAll>
