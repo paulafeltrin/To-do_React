@@ -1,30 +1,41 @@
 import React,{useState} from 'react'
 import styled from 'styled-components';
+import { AiOutlineDelete } from "react-icons/ai";
+import { FiDelete } from "react-icons/fi";
 
 const Div = styled.div`
     border: 1px solid lightgray;
     width: 50vw;
     margin: 0 auto;
+    background-color: #c1e8ee;
+    border: 1px solid pink;
+    border-radius: 5px;
     text-align: center;
 `
 
 const Form = styled.form`
-    color: green;
+    text-transform: capitalize;
     font-size: 1.2rem;
 
     li{
         text-align: left;
         list-style: none;
         margin-left: 10px;
+        width: 100%;
     }
     button{
         background-color: white;
         color: black;
         border-radius: 5px;
-        margin: 2vh 2vw;
+        margin: 2vh .5vw;
+        padding: .5vh 2vw;
+        cursor: pointer;
     }
 `
-
+const DelAll = styled.button`
+  color: red;
+  background-color: lightpink;
+`
 export default function Todo(){
 
 const [input, setInput] = useState()
@@ -46,7 +57,7 @@ function Del(rastreador){
     setList(listaFiltrada)
 }
 
-function Reset(id){
+function ClearAll(id){
     const listaFiltrada = List.filter(item => item.id === id)
     setList(listaFiltrada)
 }
@@ -59,10 +70,10 @@ function Reset(id){
         {List.map((item) => (
             <li>
                 {item.value}
-                <button onClick={() =>{Del(item.id)}}>Excluir tarefa</button>
+                <button title='Apagar item' onClick={() =>{Del(item.id)}}><FiDelete /></button>
             </li>
         ))}
-        <button onClick={() =>{Reset()}}>Excluir TODAS as tarefas</button>
+        <DelAll title='Apagar todos os itens' onClick={() =>{ClearAll()}}><AiOutlineDelete /></DelAll>
       </Form>
     </Div>
     
